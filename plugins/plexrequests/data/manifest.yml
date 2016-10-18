@@ -1,0 +1,38 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: /home/bytesized/config/plexrequests
+    name: config_folder
+    type: string
+    allow_deletion: true
+  - default_value:
+    hint: Select a free port to run this on, leave empty to have a port picked for you.
+    name: web_port
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: plexrequests
+rpc_name: PlexrequestsRPC
+show_options:
+- web_port
+- config_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/
+description: "Simple automated way for users to request new content for Plex. Please note that this app requires several minutes after installation to become ready."

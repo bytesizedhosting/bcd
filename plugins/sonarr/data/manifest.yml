@@ -1,0 +1,48 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: /home/bytesized/config/sonarr
+    name: config_folder
+    type: string
+    allow_deletion: true
+  - default_value: /home/bytesized/data
+    hint: Folder containing your data
+    name: data_folder
+    type: string
+  - default_value: /home/bytesized/media
+    hint: Folder with renamed TV data
+    name: media_folder
+    type: string
+  - default_value:
+    hint: Select a free port to run this on, leave empty to have a port picked for you.
+    name: web_port
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: Sonarr
+rpc_name: SonarrRPC
+show_options:
+- web_port
+- data_folder
+- config_folder
+- media_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/
+description: "A different automatic Video Library Manager for TV Shows"

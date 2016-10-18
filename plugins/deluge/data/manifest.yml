@@ -1,0 +1,60 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: bytesized
+    hint: "Username to authenticate the thin clien twith"
+    name: username
+    type: string
+  - default_value: /home/bytesized/config/deluge
+    hint: ""
+    allow_deletion: true
+    name: config_folder
+    type: string
+  - default_value: /home/bytesized/data
+    hint: ""
+    name: data_folder
+    type: string
+  - default_value: /home/bytesized/media
+    hint: ""
+    name: media_folder
+    type: string
+  - default_value:
+    hint: Select a free port to run this on, leave empty to have a port picked for you.
+    name: web_port
+    type: string
+  - default_value: ""
+    hint: ""
+    name: password
+    type: string
+    hint: "If you leave this empty a random password will be selected for you"
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: Deluge
+rpc_name: DelugeRPC
+show_options:
+- username
+- password
+- web_port
+- daemon_port
+- config_folder
+- data_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/
+description: "The latest Deluge version from the Apline Linux repository."

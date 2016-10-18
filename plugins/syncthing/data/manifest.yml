@@ -1,0 +1,54 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: bytesized
+    hint: ""
+    name: username
+    type: string
+  - default_value: /home/bytesized/config/syncthing
+    hint: ""
+    name: config_folder
+    type: string
+    allow_deletion: true
+  - default_value: /home/bytesized/data
+    hint: ""
+    name: data_folder
+    type: string
+  - default_value:
+    hint: Select a free port to run this on, leave empty to have a port picked for you.
+    name: web_port
+    type: string
+  - default_value: ""
+    hint: ""
+    name: password
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: Syncthing
+rpc_name: SyncthingRPC
+show_options:
+- username
+- password
+- web_port
+- config_folder
+- data_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/
+description: "Open Source data synchronization and back-up tool"

@@ -1,0 +1,12 @@
+[Unit]
+Description=Bytesized Connect Daemon
+
+[Service]
+Type=simple
+User=bytesized
+Restart=always
+RestartSec=3
+ExecStart=/usr/local/bin/bcd start
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,65 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: bytesized
+    hint: ""
+    name: username
+    type: string
+  - default_value:
+    hint: ""
+    name: password
+    type: string
+    hint: "If you leave this empty a random password will be selected for you"
+  - default_value: /home/bytesized/config/sickrage
+    name: config_folder
+    type: string
+    allow_deletion: true
+  - default_value: /home/bytesized/data
+    hint: Data will be stored here.
+    name: data_folder
+    type: string
+  - default_value: /home/bytesized/media/
+    hint: Folder with your movies and tv subfolders
+    name: media_folder
+    type: string
+  - default_value:
+    name: deluge_password
+    type: string
+  - default_value:
+    hint: ""
+    name: deluge_web_url
+    type: string
+  - default_value:
+    hint: Select a free port to run this on, leave empty to have a port picked for you.
+    name: web_port
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: Sickrage
+rpc_name: SickrageRPC
+show_options:
+- username
+- password
+- web_port
+- data_folder
+- config_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/
+description: "An automatic Video Library Manager for TV Shows"

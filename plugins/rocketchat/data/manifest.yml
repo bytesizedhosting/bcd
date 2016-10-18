@@ -1,0 +1,48 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: bytesized
+    hint: ""
+    name: username
+    type: string
+  - default_value: /home/bytesized/config/rocketchat/db
+    hint: The MongoDB database will be stored here.
+    name: database_folder
+    type: string
+  - default_value: /home/bytesized/appdata/rocketchat/uploads
+    hint: File uploads will be stored here.
+    name: data_folder
+    type: string
+  - default_value:
+    hint: Select a free port to run this on, leave empty to have a port picked for you.
+    name: web_port
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: Rocketchat
+rpc_name: RocketchatRPC
+show_options:
+- username
+- web_port
+- database_folder
+- data_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/
+description: "The Ultimate Open Source Web Chat Platform"

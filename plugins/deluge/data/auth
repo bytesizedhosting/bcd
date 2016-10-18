@@ -1,0 +1,2 @@
+localclient:{{ .EncPassword }}:10
+{{ .Username }}:{{ .Password}}:10

@@ -1,0 +1,188 @@
+#!/bin/bash
+
+is_root() {
+  [[ $(id -u) -eq 0 ]]
+}
+
+is_ubuntu() {
+  grep "Ubuntu" "/etc/os-release" &>/dev/null
+}
+
+run() {
+  local cmd=$@
+  info "running \"${cmd}\""
+  $cmd
+
+  local status=$?
+  if [[ $status -ne 0 ]]; then
+    fail "failed to run \"${cmd}\", exit status ${status}"
+  fi
+}
+timestamp() {
+  date "+%H:%M:%S.%3N"
+}
+
+info() {
+  local msg=$1
+  echo -e "\e[1;32m===> $(timestamp) ${msg}\e[0m"
+}
+
+warn() {
+  local msg=$1
+  echo -e "\e[1;33m===> $(timestamp) ${msg}\e[0m"
+}
+
+fail() {
+  local msg=$1
+  echo -e "\e[1;31m===> $(timestamp) ERROR: ${msg}\e[0m"
+  exit 1
+}
+
+is_upstart() {
+  [[ `/sbin/init --version 2> /dev/null` =~ upstart ]]
+}
+is_systemd() {
+  [[ `systemctl 2> /dev/null` =~ -\.mount ]]
+}
+bcd_exists(){
+  [ -e "/usr/local/bin/bcd" ]
+}
+start_bcd(){
+  if is_upstart; then
+    run start bcd
+    run start bcd-proxy
+  elif is_systemd; then
+    run service bcd start
+    run service bcd-proxy start
+  fi
+}
+stop_bcd(){
+  if is_upstart; then
+    stop bcd
+    stop bcd-proxy
+  elif is_systemd; then
+    service bcd stop
+    service bcd-proxy stop
+  fi
+}
+update_services(){
+    if is_upstart; then
+      info "Found upstart"
+      if ! curl -o /etc/init/bcd.conf https://download.bytesized-hosting.com/bcd.conf;then
+        fail "Failed to download upstart service file"
+      fi
+
+      if ! curl -o /etc/init/bcd-proxy.conf https://download.bytesized-hosting.com/bcd-proxy.conf;then
+        fail "Failed to download proxy upstart service file"
+      fi
+    elif is_systemd; then
+      info "Found systemd"
+      if ! curl -o /lib/systemd/system/bcd.service https://download.bytesized-hosting.com/bcd.service;then
+        fail "Failed to download systemd service file"
+      fi
+
+      if ! curl -o /lib/systemd/system/bcd-proxy.service https://download.bytesized-hosting.com/bcd-proxy.service;then
+        fail "Failed to download bcd-proxy systemd service file"
+      fi
+
+      systemctl daemon-reload
+    fi
+}
+download_bins(){
+    info "Downloading latest BCD release"
+    if ! curl -o /usr/local/bin/bcd https://download.bytesized-hosting.com/bcd;then
+      fail "Failed to download bcd release"
+    fi
+    run chmod +x /usr/local/bin/bcd
+
+    info "Downloading latest BCD-Proxy release"
+    if ! curl -o /usr/local/bin/bcd-proxy https://download.bytesized-hosting.com/bcd-proxy;then
+      fail "Failed to download bcd-proxy release"
+    fi
+
+    run chmod +x /usr/local/bin/bcd-proxy
+}
+main() {
+  if ! is_root; then
+    fail "this script must be executed as the root user"
+  fi
+
+  if ! is_ubuntu; then
+    fail "this script is only compatible with Ubuntu"
+  fi
+
+  if [[ "$1" = "upgrade" ]];then
+    if ! bcd_exists;then
+      fail "You waned to upgrade bcd but it doesn't appear to be installed."
+    fi
+    stop_bcd
+
+    download_bins
+
+    update_services
+
+    start_bcd
+
+  else
+    local ubuntu_version=$(cat /etc/os-release | grep VERSION_ID| cut -d = -f2 | sed "s/\"//g")
+    local version_name=$(lsb_release -a | grep "Codename" | awk '{print $2}')
+
+    if [[ "${version_name}" = "" ]];then
+      fail "Sorry but an unsupported Ubuntu version was found $ubuntu_version - $version_name"
+    fi
+
+    info "Found Ubuntu version ${ubuntu_version}"
+    info "Installing Docker"
+    run apt-get update
+    run apt-get install -y apt-transport-https ca-certificates curl
+    run apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    echo "deb https://apt.dockerproject.org/repo ubuntu-${version_name} main" >/etc/apt/sources.list.d/docker.list
+    run apt-get update
+    run apt-get install -y docker-engine
+
+    download_bins
+
+    info "Checking for bytesized user"
+    id bytesized &> /dev/null
+    local status=$?
+    info "${status} <- is status"
+    if [[ $status -ne 0 ]]; then
+      info "Creating bytesized user"
+      run useradd bytesized -G docker --home /home/bytesized/ -m
+    fi
+
+    run sudo -u bytesized /usr/local/bin/bcd init $APIKEY $APISECRET
+
+    if is_upstart; then
+      info "Found upstart"
+      if ! curl -o /etc/init/bcd.conf https://download.bytesized-hosting.com/bcd.conf;then
+        fail "Failed to download upstart service file"
+      fi
+
+      if ! curl -o /etc/init/bcd-proxy.conf https://download.bytesized-hosting.com/bcd-proxy.conf;then
+        fail "Failed to download proxy upstart service file"
+      fi
+
+      run start bcd
+      run start bcd-proxy
+
+    elif is_systemd; then
+      info "Found systemd"
+      if ! curl -o /lib/systemd/system/bcd.service https://download.bytesized-hosting.com/bcd.service;then
+        fail "Failed to download systemd service file"
+      fi
+
+      if ! curl -o /lib/systemd/system/bcd-proxy.service https://download.bytesized-hosting.com/bcd-proxy.service;then
+        fail "Failed to download bcd-proxy systemd service file"
+      fi
+
+      run systemctl enable bcd.service
+      run systemctl enable bcd-proxy.service
+
+      run service bcd start
+      run service bcd-proxy start
+    fi
+  fi
+}
+
+main $@

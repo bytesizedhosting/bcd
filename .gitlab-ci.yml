@@ -1,0 +1,25 @@
+image: docker:latest
+
+services:
+- docker:dind
+
+before_script:
+- docker info
+
+test:
+  stage: test
+  script:
+    - docker run --rm -v "$PWD":/go/src/gitlab.com/bytesized/bcd/ -w /go/src/gitlab.com/bytesized/bcd/ golang:1.7.1 go test $(go list ./... | grep -v /vendor/)
+  tags:
+    - docker
+
+build:
+  artifacts:
+    name: "bcd_${CI_BUILD_REF_NAME}"
+    paths:
+      - bcd
+  stage: build
+  script:
+    - docker run --rm -v "$PWD":/go/src/gitlab.com/bytesized/bcd/ -w /go/src/gitlab.com/bytesized/bcd/ golang:1.7.1 sh bin/build
+  tags:
+    - docker

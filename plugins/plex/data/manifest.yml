@@ -1,0 +1,60 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: ""
+    hint: ""
+    name: plex_email
+    type: string
+  - default_value: ""
+    hint: ""
+    name: plex_password
+    type: password
+  - default_value: /home/bytesized/config/plex
+    hint: ""
+    name: config_folder
+    type: string
+  - default_value: /home/bytesized/media
+    hint: "The folder that contains your media"
+    name: media_folder
+    type: string
+  - default_value: /home/bytesized/data
+    hint: ""
+    name: data_folder
+    type: string
+  - default_value: ""
+    hint: ""
+    name: plex_pass
+    type: boolean
+  - default_value:
+    hint: Select a free port to run this on, leave empty to have a port picked for you.
+    name: web_port
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: Plex
+rpc_name: PlexRPC
+show_options:
+- plex_email
+- web_port
+- config_folder
+- data_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/web/
+description: "Latest Plex server from the un-official Plex repository"
