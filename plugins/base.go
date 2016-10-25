@@ -73,16 +73,19 @@ func (opts *BaseOpts) SetDefault(name string) error {
 		log.Debugln("No config_folder supplied, using default.")
 		opts.ConfigFolder = path.Join(opts.User.HomeDir, "config", name)
 	}
+	core.EnsurePath(opts.ConfigFolder)
 
 	if opts.DataFolder == "" {
 		log.Debugln("No data_folder supplied, using default.")
 		opts.DataFolder = path.Join(opts.User.HomeDir, "data")
 	}
+	core.EnsurePath(opts.DataFolder)
 
 	if opts.MediaFolder == "" {
 		log.Debugln("No media_folder supplied, using default.")
 		opts.MediaFolder = path.Join(opts.User.HomeDir, "media")
 	}
+	core.EnsurePath(opts.MediaFolder)
 
 	if opts.Username == "" {
 		log.Debugln("No username supplied, using default.")

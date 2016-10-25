@@ -80,3 +80,16 @@ func PortFree(port string) bool {
 		return false
 	}
 }
+
+func EnsurePath(pathName string) error {
+	log.Debugf("Ensuring folder %s exists.", pathName)
+	if _, err := os.Stat(pathName); os.IsNotExist(err) {
+		log.Debugf("Path does not exist, creating", pathName)
+		err = os.MkdirAll(pathName, 0755)
+		if err != nil {
+			log.Warnln("Could not create path.")
+			return err
+		}
+	}
+	return nil
+}
