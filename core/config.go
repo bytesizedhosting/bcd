@@ -77,7 +77,6 @@ func LoadConfig(filePath string, conf interface{}) error {
 
 	return nil
 }
-
 func WriteConfig(fileName string, conf interface{}) error {
 	configPath, err := ConfigPath()
 	if err != nil {
