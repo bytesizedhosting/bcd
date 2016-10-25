@@ -71,7 +71,7 @@ func (self *Plex) Install(opts *PlexOpts) error {
 	}
 
 	log.Infoln("Creating docker container")
-	conf := docker.Config{Env: []string{"PUID=" + opts.User.Uid, "GUID=" + opts.User.Gid, "PLEX_USERNAME=" + opts.PlexEmail, "PLEX_PASSWORD=" + opts.PlexPassword, "PLEX_EXTERNALPORT=" + opts.WebPort, "RUN_AS_ROOT=FALSE"}, Image: dockerImage}
+	conf := docker.Config{Env: []string{"PUID=" + opts.User.Uid, "PGID=" + opts.User.Gid, "PLEX_USERNAME=" + opts.PlexEmail, "PLEX_PASSWORD=" + opts.PlexPassword, "PLEX_EXTERNALPORT=" + opts.WebPort, "RUN_AS_ROOT=FALSE"}, Image: dockerImage}
 	c, err := self.DockerClient.CreateContainer(docker.CreateContainerOptions{Config: &conf, HostConfig: &hostConfig, Name: "bytesized_plex_" + opts.WebPort})
 
 	if err != nil {
