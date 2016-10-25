@@ -12,8 +12,8 @@ import (
 
 const (
 	versionMajor = 0
-	versionMinor = 11
-	versionPatch = 1
+	versionMinor = 12
+	versionPatch = 0
 )
 
 var (
@@ -34,7 +34,7 @@ type MainConfig struct {
 	Port      string `json:"port"`
 }
 
-func homedir() (string, error) {
+func Homedir() (string, error) {
 	curUser, err := user.Current()
 	if err != nil {
 		return "", err
@@ -42,7 +42,7 @@ func homedir() (string, error) {
 	return curUser.HomeDir, nil
 }
 func ConfigPath() (string, error) {
-	home, err := homedir()
+	home, err := Homedir()
 	if err != nil {
 		return "", err
 	}

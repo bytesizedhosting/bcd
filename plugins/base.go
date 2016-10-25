@@ -5,9 +5,9 @@ package plugins
 import (
 	"fmt"
 	log "github.com/Sirupsen/logrus"
+	"github.com/bytesizedhosting/bcd/core"
 	"github.com/fsouza/go-dockerclient"
 	"github.com/ghodss/yaml"
-	"github.com/bytesizedhosting/bcd/core"
 	"io/ioutil"
 	"net/rpc"
 	"os"

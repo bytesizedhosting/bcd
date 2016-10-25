@@ -12,8 +12,11 @@ import (
 var proxyPath string
 
 var (
-	port     = kingpin.Flag("port", "Port to run BCD-Proxy on").Default("80").String()
-	userName = kingpin.Flag("username", "User configuration to read").Default("bytesized").String()
+	port            = kingpin.Flag("port", "Port to run BCD-Proxy on").Default("80").String()
+	userName        = kingpin.Flag("username", "User who's configuration file to read, usually this is the user running BCD.").Default("bytesized").String()
+	cachePath       = kingpin.Flag("cache-path", "Location where to store certificates and keyfiles").String()
+	enableAutoHttps = kingpin.Flag("enable-auto-https", "Enable experimental auto-https support.").Bool()
+	email           = kingpin.Flag("email", "Email address to use for Letsencrypt certificates").String()
 )
 
 func init() {
@@ -35,6 +38,14 @@ func init() {
 
 func main() {
 	proxy := NewMultipleHostReverseProxy(proxyPath)
+
+	if *enableAutoHttps {
+		log.Infoln("Enabling experimental auto-https support")
+		s := NewAutoHttpsServer(*cachePath, *email, proxy)
+		go func() {
+			log.Fatal(s.ListenAndServeTLS("", ""))
+		}()
+	}
 
 	log.Fatal(http.ListenAndServe(":"+*port, proxy))
 }

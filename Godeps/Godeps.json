@@ -2,6 +2,9 @@
 	"ImportPath": "github.com/bytesizedhosting/bcd",
 	"GoVersion": "go1.7",
 	"GodepVersion": "v74",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",
@@ -188,24 +191,32 @@
 			"Rev": "3c9377fc6748f222729a8270fe2775d149a249ad"
 		},
 		{
+			"ImportPath": "golang.org/x/crypto/acme",
+			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/acme/autocert",
+			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
+		},
+		{
 			"ImportPath": "golang.org/x/crypto/bcrypt",
-			"Rev": "81372b2fc2f10bef2a7f338da115c315a56b2726"
+			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/blowfish",
-			"Rev": "81372b2fc2f10bef2a7f338da115c315a56b2726"
+			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
-			"Rev": "71a035914f99bb58fe82eac0f1289f10963d876c"
+			"Rev": "daba796358cd2742b75aae05761f1b898c9f6a5c"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context/ctxhttp",
-			"Rev": "71a035914f99bb58fe82eac0f1289f10963d876c"
+			"Rev": "daba796358cd2742b75aae05761f1b898c9f6a5c"
 		},
 		{
 			"ImportPath": "golang.org/x/sys/unix",
-			"Rev": "8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9"
+			"Rev": "8d1157a435470616f975ff9bb013bea8d0962067"
 		},
 		{
 			"ImportPath": "gopkg.in/alecthomas/kingpin.v2",
