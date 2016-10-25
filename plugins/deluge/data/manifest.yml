@@ -6,7 +6,7 @@ exposed_methods:
 method_options:
   Install:
   - default_value: bytesized
-    hint: "Username to authenticate the thin clien twith"
+    hint: "Username to authenticate the thin client with"
     name: username
     type: string
   - default_value: /home/bytesized/config/deluge
@@ -57,4 +57,4 @@ show_options:
 - data_folder
 version: 1
 web_url_format: http://##ip##:##web_port##/
-description: "The latest Deluge version from the Apline Linux repository."
+description: "The latest Deluge version from the Alpine Linux repository."

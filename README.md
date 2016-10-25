@@ -1,5 +1,7 @@
 ## Bytesized Connect Daemon (BCD)
 
+[![Join the chat at https://gitter.im/bytesizedhosting/bcd](https://badges.gitter.im/bytesizedhosting/bcd.svg)](https://gitter.im/bytesizedhosting/bcd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is the daemon part of the Bytesized Connect project running at connect.bytesized-hosting.com.
 
 Bytesized Connect transforms your (virtual) server into a application platform that you can manage from the Bytesized website.
