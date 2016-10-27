@@ -50,12 +50,11 @@ func (self *Murmur) Install(opts *MurmurOpts) error {
 		return err
 	}
 
-	/*
-		log.Debugln("Pulling docker image", self.imageName)
-		err = self.DockerClient.PullImage(docker.PullImageOptions{Repository: self.imageName}, docker.AuthConfiguration{})
-		if err != nil {
-			return err
-		}*/
+	log.Debugln("Pulling docker image", self.imageName)
+	err = self.DockerClient.PullImage(docker.PullImageOptions{Repository: self.imageName}, docker.AuthConfiguration{})
+	if err != nil {
+		return err
+	}
 
 	portBindings := map[docker.Port][]docker.PortBinding{
 		"64738/tcp": []docker.PortBinding{docker.PortBinding{HostPort: opts.WebPort}},
