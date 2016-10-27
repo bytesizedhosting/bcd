@@ -35,4 +35,4 @@ show_options:
 - config_folder
 version: 1
 web_url_format: http://##ip##:##web_port##/
-description: "Simple automated way for users to request new content for Plex. Please note that this app requires several minutes after installation to become ready."
+description: "Simple automated way for users to request new content for Plex."
