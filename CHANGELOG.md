@@ -1,7 +1,8 @@
 ## Changelog
 
-### Version 0.12.1
+### Version 0.13.0
 
+- New Application added: Murmur, the server for the Mumble voice client.
 - Enable auto-https by default
 
 You can disable the support by using the --disable-auto-https flag.

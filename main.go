@@ -3,13 +3,13 @@ package main
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/fsouza/go-dockerclient"
 	"github.com/bytesizedhosting/bcd/core"
 	"github.com/bytesizedhosting/bcd/engines"
 	"github.com/bytesizedhosting/bcd/plugins/cardigann"
 	"github.com/bytesizedhosting/bcd/plugins/couchpotato"
 	"github.com/bytesizedhosting/bcd/plugins/deluge"
 	"github.com/bytesizedhosting/bcd/plugins/jobs"
+	"github.com/bytesizedhosting/bcd/plugins/murmur"
 	"github.com/bytesizedhosting/bcd/plugins/nzbget"
 	"github.com/bytesizedhosting/bcd/plugins/plex"
 	"github.com/bytesizedhosting/bcd/plugins/plexpy"
@@ -22,6 +22,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/stats"
 	"github.com/bytesizedhosting/bcd/plugins/subsonic"
 	"github.com/bytesizedhosting/bcd/plugins/syncthing"
+	"github.com/fsouza/go-dockerclient"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
 )
@@ -141,6 +142,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(subsonic)
+	}
+
+	murmur, err := murmur.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(murmur)
 	}
 
 	engine.Activate(stats.New())
