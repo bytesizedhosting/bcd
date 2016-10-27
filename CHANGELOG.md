@@ -1,5 +1,11 @@
 ## Changelog
 
+### Version 0.12.1
+
+- Enable auto-https by default
+
+You can disable the support by using the --disable-auto-https flag.
+
 ### Version 0.12.0
 
 - Added (lazy) auto-https support.
