@@ -74,13 +74,11 @@ func (self *Filebot) Install(opts *FilebotOpts) error {
 		"filebot_action": opts.FilebotAction,
 	}).Debug("Plugin options")
 
-	/*
-		log.Debugln("Pulling docker image", self.imageName)
-		err = self.DockerClient.PullImage(docker.PullImageOptions{Repository: self.imageName}, docker.AuthConfiguration{})
-		if err != nil {
-			return err
-		}
-	*/
+	log.Debugln("Pulling docker image", self.imageName)
+	err = self.DockerClient.PullImage(docker.PullImageOptions{Repository: self.imageName}, docker.AuthConfiguration{})
+	if err != nil {
+		return err
+	}
 
 	hostConfig := docker.HostConfig{
 		Binds: []string{opts.DataFolder + ":/host", opts.ConfigFolder + ":/config"},
