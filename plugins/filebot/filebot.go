@@ -2,7 +2,6 @@ package filebot
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/bytesizedhosting/bcd/core"
 	"github.com/bytesizedhosting/bcd/plugins"
 	"github.com/fsouza/go-dockerclient"
 	"net/rpc"
