@@ -5,7 +5,6 @@ import (
 	"github.com/fsouza/go-dockerclient"
 	"github.com/bytesizedhosting/bcd/plugins"
 	"net/rpc"
-	"os"
 )
 
 type {{ .Name }} struct {
@@ -45,11 +44,6 @@ func (self *{{ .Name }}) Install(opts *{{ .Name }}Opts) error {
 		"config_folder": opts.ConfigFolder,
 		"username":     opts.Username,
 	}).Debug("Plugin options")
-
-	err = os.MkdirAll(opts.ConfigFolder, 0755)
-	if err != nil {
-		return err
-	}
 
 	log.Debugln("Pulling docker image", self.imageName)
 	err = self.DockerClient.PullImage(docker.PullImageOptions{Repository: self.imageName}, docker.AuthConfiguration{})
