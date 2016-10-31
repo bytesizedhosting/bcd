@@ -4,8 +4,8 @@ import (
 	"crypto/md5"
 	"fmt"
 	log "github.com/Sirupsen/logrus"
-	"github.com/fsouza/go-dockerclient"
 	"github.com/bytesizedhosting/bcd/plugins"
+	"github.com/fsouza/go-dockerclient"
 	"net/rpc"
 	"os"
 )

@@ -1,0 +1,51 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: /home/bytesized/config/filebot
+    name: config_folder
+    type: string
+    allow_deletion: true
+  - default_value: "/host/media"
+    name: "output_folder"
+    type: string
+    hint: "The folder seen from inside the Docker container where your Filebot results should go into. Your home folder is mounted as /host so the default is /host/media"
+  - default_value: "/host/data/completed"
+    name: "input_folder"
+    type: string
+    hint: "The folder seen from inside the Docker container where Filebot should look for files to process."
+  - default_value: "symlink"
+    name: "filebot_action"
+    type: string
+    hint: "The action Filebot should take when processing your files. Valid options: symlink, copy, move. Hardlink does not work."
+  - default_value: "en"
+    name: "subtitle_lang"
+    type: string
+    hint: "The language code for the subtitles Filebot should try to find"
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: Filebot
+rpc_name: FilebotRPC
+show_options:
+- config_folder
+- input_folder
+- output_folder
+- filebot_action
+version: 1
+description: "Filebot is a file organizer written in Java"

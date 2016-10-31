@@ -8,6 +8,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/cardigann"
 	"github.com/bytesizedhosting/bcd/plugins/couchpotato"
 	"github.com/bytesizedhosting/bcd/plugins/deluge"
+	"github.com/bytesizedhosting/bcd/plugins/filebot"
 	"github.com/bytesizedhosting/bcd/plugins/jobs"
 	"github.com/bytesizedhosting/bcd/plugins/murmur"
 	"github.com/bytesizedhosting/bcd/plugins/nzbget"
@@ -149,6 +150,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(murmur)
+	}
+
+	filebot, err := filebot.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(filebot)
 	}
 
 	engine.Activate(stats.New())
