@@ -24,7 +24,7 @@ method_options:
   - default_value: "en"
     name: "subtitle_lang"
     type: string
-    hint: "The language code for the subtitles Filebot should try to find"
+    hint: "The language code for the subtitles Filebot should try to find, leave empty for none."
   Restart:
   - default_value: ""
     hint: ""
