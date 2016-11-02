@@ -1,5 +1,11 @@
 ## Changelog
 
+### Version 0.14.0
+
+- New Appplication added: Filebot.
+
+Filebot uses inotify to watch a folder for filesystem events, runs on the input and outputs to the given outfolder folder.
+
 ### Version 0.13.0
 
 - New Application added: Murmur, the server for the Mumble voice client.
