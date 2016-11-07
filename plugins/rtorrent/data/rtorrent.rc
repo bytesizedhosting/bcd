@@ -15,14 +15,14 @@ directory = /data/completed
 session = /config/rtorrent/rtorrent_sess
 schedule = low_diskspace,5,60,close_low_diskspace=200M
 bind = 0.0.0.0
-port_range = 55555-55555
+port_range = {{ .InternalPort }}-{{ .InternalPort }}
 check_hash = yes
 use_udp_trackers = yes
 encryption = allow_incoming,try_outgoing,enable_retry
 dht = auto
 check_hash = no
 port_random = no
-dht_port = 6112
+dht_port = {{ .DhtPort }}
 peer_exchange = yes
 # scgi_port = 0.0.0.0:5000
 encoding_list = UTF-8

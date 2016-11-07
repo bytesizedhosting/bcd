@@ -87,6 +87,7 @@ func (self *RpcEngine) Start() {
 
 			serverCodec := jsonrpc.NewServerCodec(&HttpConn{in: r.Body, out: w})
 			w.Header().Set("Content-type", "application/json")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
 			w.WriteHeader(200)
 			err = self.server.ServeRequest(serverCodec)
 			if err != nil {

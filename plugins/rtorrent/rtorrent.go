@@ -2,9 +2,9 @@ package rtorrent
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/fsouza/go-dockerclient"
 	"github.com/bytesizedhosting/bcd/core"
 	"github.com/bytesizedhosting/bcd/plugins"
+	"github.com/fsouza/go-dockerclient"
 	"net/rpc"
 	"os"
 	"path"
@@ -91,6 +91,15 @@ func (self *Rtorrent) Install(opts *RtorrentOpts) error {
 		return err
 	}
 
+	err = core.EnsurePath(path.Join(opts.ConfigFolder, "/nginx/"))
+	if err != nil {
+		return err
+	}
+	err = self.WriteTemplate("plugins/rtorrent/data/nginx.conf", path.Join(opts.ConfigFolder, "/nginx/nginx.conf"), opts)
+	if err != nil {
+		return err
+	}
+
 	err = self.WriteTemplate("plugins/rtorrent/data/rtorrent.rc", path.Join(opts.ConfigFolder, "/rtorrent/rtorrent.rc"), opts)
 	if err != nil {
 		return err
@@ -103,15 +112,17 @@ func (self *Rtorrent) Install(opts *RtorrentOpts) error {
 	}
 
 	portBindings := map[docker.Port][]docker.PortBinding{
-		"55555/tcp": []docker.PortBinding{docker.PortBinding{HostPort: opts.InternalPort}},
-		"6112/tcp":  []docker.PortBinding{docker.PortBinding{HostPort: opts.DhtPort}},
-		"80/tcp":    []docker.PortBinding{docker.PortBinding{HostPort: opts.WebPort}},
+		docker.Port(opts.InternalPort + "/tcp"): []docker.PortBinding{docker.PortBinding{HostPort: opts.InternalPort}},
+		docker.Port(opts.DhtPort + "/tcp"):      []docker.PortBinding{docker.PortBinding{HostPort: opts.DhtPort}},
+		"80/tcp": []docker.PortBinding{docker.PortBinding{HostPort: opts.WebPort}},
 	}
+	log.Println(portBindings)
 
 	conf := docker.Config{Env: []string{"PUID=" + opts.User.Uid}, Image: imageName}
 
 	hostConfig := docker.HostConfig{
 		PortBindings: portBindings,
+		NetworkMode:  "host",
 		Binds:        plugins.DefaultBindings(opts),
 	}
 
