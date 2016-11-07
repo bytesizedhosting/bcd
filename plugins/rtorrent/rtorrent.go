@@ -111,19 +111,11 @@ func (self *Rtorrent) Install(opts *RtorrentOpts) error {
 		return err
 	}
 
-	portBindings := map[docker.Port][]docker.PortBinding{
-		docker.Port(opts.InternalPort + "/tcp"): []docker.PortBinding{docker.PortBinding{HostPort: opts.InternalPort}},
-		docker.Port(opts.DhtPort + "/tcp"):      []docker.PortBinding{docker.PortBinding{HostPort: opts.DhtPort}},
-		"80/tcp": []docker.PortBinding{docker.PortBinding{HostPort: opts.WebPort}},
-	}
-	log.Println(portBindings)
-
 	conf := docker.Config{Env: []string{"PUID=" + opts.User.Uid}, Image: imageName}
 
 	hostConfig := docker.HostConfig{
-		PortBindings: portBindings,
-		NetworkMode:  "host",
-		Binds:        plugins.DefaultBindings(opts),
+		NetworkMode: "host",
+		Binds:       plugins.DefaultBindings(opts),
 	}
 
 	log.Debugln("Creating docker container")
