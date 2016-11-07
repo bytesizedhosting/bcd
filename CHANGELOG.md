@@ -1,5 +1,10 @@
 ## Changelog
 
+### Version 0.14.1
+
+- Changed rTorrent app to expose all ports by default and no longer use Dockerfile port bindings
+- Added filebot.sh to the /config folder instead of /app so users can make any modifications they want to the filebot cli arguments
+
 ### Version 0.14.0
 
 - New Appplication added: Filebot.

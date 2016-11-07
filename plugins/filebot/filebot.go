@@ -5,6 +5,8 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins"
 	"github.com/fsouza/go-dockerclient"
 	"net/rpc"
+	"os"
+	"path"
 )
 
 type Filebot struct {
@@ -57,6 +59,16 @@ func (self *Filebot) Install(opts *FilebotOpts) error {
 
 	if opts.FilebotAction == "" {
 		opts.InputFolder = "symlink"
+	}
+
+	err = self.WriteTemplate("plugins/filebot/data/filebot.sh", path.Join(opts.ConfigFolder, "/filebot.sh"), opts)
+	if err != nil {
+		return err
+	}
+
+	err = os.Chmod(path.Join(opts.ConfigFolder, "filebot.sh"), 0744)
+	if err != nil {
+		return err
 	}
 
 	err = self.WriteTemplate("plugins/filebot/data/filebot.conf", opts.ConfigFolder+"/filebot.conf", opts)

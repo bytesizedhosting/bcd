@@ -13,7 +13,7 @@ import (
 const (
 	versionMajor = 0
 	versionMinor = 14
-	versionPatch = 0
+	versionPatch = 1
 )
 
 var (
