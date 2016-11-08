@@ -17,7 +17,7 @@ RUN cd rclone-*-linux-amd64 && \
           chmod 755 /usr/sbin/rclone
 
 VOLUME /config /media /data
-COPY static /
+COPY static / /
 
 EXPOSE 64738
 
