@@ -1,4 +1,4 @@
-package plugins
+package rclone
 
 import (
         log "github.com/Sirupsen/logrus"
@@ -19,7 +19,7 @@ type ActionOpts struct {
         DeleteFolders []string `json:"delete_folders"`
 }
 
-func (self *BaseRPC) Start(opts *ActionOpts, success *bool) error {
+func (self *RcloneRPC) Start(opts *RcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         log.WithFields(log.Fields{
                 "container_id": containerId,
@@ -41,7 +41,7 @@ func (self *BaseRPC) Start(opts *ActionOpts, success *bool) error {
         return nil
 }
 
-func (self *rcloneRPC) Status(opts *ActionOpts, state *docker.State) error {
+func (self *RcloneRPC) Status(opts *RcloneOpts, state *docker.State) error {
         containerId := opts.ContainerId
         s, err := self.base.Status(&AppConfig{ContainerId: containerId})
         if err != nil {
@@ -52,7 +52,7 @@ func (self *rcloneRPC) Status(opts *ActionOpts, state *docker.State) error {
         return nil
 }
 
-func (self *rcloneRPC) Stop(opts *ActionOpts, success *bool) error {
+func (self *RcloneRPC) Stop(opts *RcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         log.WithFields(log.Fields{
                 "container_id": containerId,
@@ -73,7 +73,7 @@ func (self *rcloneRPC) Stop(opts *ActionOpts, success *bool) error {
 
         return nil
 }
-func (self *rcloneRPC) Restart(opts *ActionOpts, success *bool) error {
+func (self *RcloneRPC) Restart(opts *RcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         err := self.base.Restart(&AppConfig{ContainerId: containerId})
 
@@ -84,7 +84,7 @@ func (self *rcloneRPC) Restart(opts *ActionOpts, success *bool) error {
 
         return nil
 }
-func (self *rcloneRPC) Uninstall(opts *ActionOpts, success *bool) error {
+func (self *RcloneRPC) Uninstall(opts *RcloneOpts, success *bool) error {
         containerId := opts.ContainerId
 
         log.WithFields(log.Fields{
