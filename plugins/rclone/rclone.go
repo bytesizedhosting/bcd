@@ -14,13 +14,13 @@ type rclone struct {
 }
 
 func New(client *docker.Client) (*rclone, error) {
-	manifest, err := plugins.LoadManifest("sonarr")
+	manifest, err := plugins.LoadManifest("rclone")
 
 	if err != nil {
 		return nil, err
 	}
 
-	return &rclone{Base: plugins.Base{DockerClient: client, Name: "sonarr", Version: 1, Manifest: manifest}, imageName: "bytesized/sonarr"}, nil
+	return &rclone{Base: plugins.Base{DockerClient: client, Name: "rclone", Version: 1, Manifest: manifest}, imageName: "bytesized/sonarr"}, nil
 }
 
 func (self *rclone) RegisterRPC(server *rpc.Server) {
@@ -70,7 +70,7 @@ func (self *rclone) Install(opts *rcloneOpts) error {
 	conf := docker.Config{Env: []string{"PUID=" + opts.User.Uid}, Image: self.imageName}
 
 	log.Debugln("Creating docker container")
-	c, err := self.DockerClient.CreateContainer(docker.CreateContainerOptions{Config: &conf, HostConfig: &hostConfig, Name: "bytesized_sonarr_" + opts.WebPort})
+	c, err := self.DockerClient.CreateContainer(docker.CreateContainerOptions{Config: &conf, HostConfig: &hostConfig, Name: "bytesized_rclone_" + opts.WebPort})
 
 	if err != nil {
 		return err
