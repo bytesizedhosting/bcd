@@ -21,7 +21,7 @@ func New(client *docker.Client) (*rclone, error) {
                 return nil, err
         }
 
-        return &rclone{Base: plugins.Base{DockerClient: client, Name: "rclone", Version: 1, Manifest: manifest}, imageName: "bytesized/sonarr"}, nil
+        return &rclone{Base: plugins.Base{DockerClient: client, Name: "rclone", Version: 1, Manifest: manifest}, imageName: "bytesized/rclone"}, nil
 }
 
 func (self *rclone) RegisterRPC(server *rpc.Server) {
