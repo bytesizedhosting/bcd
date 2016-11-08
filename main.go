@@ -9,6 +9,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/couchpotato"
 	"github.com/bytesizedhosting/bcd/plugins/deluge"
 	"github.com/bytesizedhosting/bcd/plugins/filebot"
+	"github.com/bytesizedhosting/bcd/plugins/headphones"
 	"github.com/bytesizedhosting/bcd/plugins/jobs"
 	"github.com/bytesizedhosting/bcd/plugins/murmur"
 	"github.com/bytesizedhosting/bcd/plugins/nzbget"
@@ -165,6 +166,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(resilio)
+	}
+
+	headphones, err := headphones.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(headphones)
 	}
 
 	engine.Activate(stats.New())
