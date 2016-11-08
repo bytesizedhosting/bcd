@@ -6,7 +6,7 @@ import (
         "os"
 )
 
-func NewBaseRPC(parent appPlugin) *BaseRPC {
+func NewBaseRPC(parent appPlugin) *rcloneRPC {
         return &BaseRPC{parent}
 }
 
@@ -19,7 +19,7 @@ type ActionOpts struct {
         DeleteFolders []string `json:"delete_folders"`
 }
 
-func (self *RcloneRPC) Start(opts *RcloneOpts, success *bool) error {
+func (self *rcloneRPC) Start(opts *rcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         log.WithFields(log.Fields{
                 "container_id": containerId,
@@ -41,7 +41,7 @@ func (self *RcloneRPC) Start(opts *RcloneOpts, success *bool) error {
         return nil
 }
 
-func (self *RcloneRPC) Status(opts *RcloneOpts, state *docker.State) error {
+func (self *rcloneRPC) Status(opts *rcloneOpts, state *docker.State) error {
         containerId := opts.ContainerId
         s, err := self.base.Status(&AppConfig{ContainerId: containerId})
         if err != nil {
@@ -52,7 +52,7 @@ func (self *RcloneRPC) Status(opts *RcloneOpts, state *docker.State) error {
         return nil
 }
 
-func (self *RcloneRPC) Stop(opts *RcloneOpts, success *bool) error {
+func (self *rcloneRPC) Stop(opts *rcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         log.WithFields(log.Fields{
                 "container_id": containerId,
@@ -73,7 +73,7 @@ func (self *RcloneRPC) Stop(opts *RcloneOpts, success *bool) error {
 
         return nil
 }
-func (self *RcloneRPC) Restart(opts *RcloneOpts, success *bool) error {
+func (self *rcloneRPC) Restart(opts *rcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         err := self.base.Restart(&AppConfig{ContainerId: containerId})
 
@@ -84,7 +84,7 @@ func (self *RcloneRPC) Restart(opts *RcloneOpts, success *bool) error {
 
         return nil
 }
-func (self *RcloneRPC) Uninstall(opts *RcloneOpts, success *bool) error {
+func (self *rcloneRPC) Uninstall(opts *rcloneOpts, success *bool) error {
         containerId := opts.ContainerId
 
         log.WithFields(log.Fields{
