@@ -1,4 +1,4 @@
-package rclone
+package Rclone
 
 import (
         log "github.com/Sirupsen/logrus"
@@ -6,8 +6,8 @@ import (
         "os"
 )
 
-func NewBaseRPC(parent appPlugin) *rcloneRPC {
-        return &BaseRPC{parent}
+func NewRcloneRPC(parent appPlugin) *RcloneRPC {
+        return &RcloneRPC{parent}
 }
 
 type BaseRPC struct {
@@ -19,7 +19,7 @@ type ActionOpts struct {
         DeleteFolders []string `json:"delete_folders"`
 }
 
-func (self *rcloneRPC) Start(opts *rcloneOpts, success *bool) error {
+func (self *RcloneRPC) Start(opts *RcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         log.WithFields(log.Fields{
                 "container_id": containerId,
@@ -41,7 +41,7 @@ func (self *rcloneRPC) Start(opts *rcloneOpts, success *bool) error {
         return nil
 }
 
-func (self *rcloneRPC) Status(opts *rcloneOpts, state *docker.State) error {
+func (self *RcloneRPC) Status(opts *RcloneOpts, state *docker.State) error {
         containerId := opts.ContainerId
         s, err := self.base.Status(&AppConfig{ContainerId: containerId})
         if err != nil {
@@ -52,7 +52,7 @@ func (self *rcloneRPC) Status(opts *rcloneOpts, state *docker.State) error {
         return nil
 }
 
-func (self *rcloneRPC) Stop(opts *rcloneOpts, success *bool) error {
+func (self *RcloneRPC) Stop(opts *RcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         log.WithFields(log.Fields{
                 "container_id": containerId,
@@ -73,7 +73,7 @@ func (self *rcloneRPC) Stop(opts *rcloneOpts, success *bool) error {
 
         return nil
 }
-func (self *rcloneRPC) Restart(opts *rcloneOpts, success *bool) error {
+func (self *RcloneRPC) Restart(opts *RcloneOpts, success *bool) error {
         containerId := opts.ContainerId
         err := self.base.Restart(&AppConfig{ContainerId: containerId})
 
@@ -84,7 +84,7 @@ func (self *rcloneRPC) Restart(opts *rcloneOpts, success *bool) error {
 
         return nil
 }
-func (self *rcloneRPC) Uninstall(opts *rcloneOpts, success *bool) error {
+func (self *RcloneRPC) Uninstall(opts *RcloneOpts, success *bool) error {
         containerId := opts.ContainerId
 
         log.WithFields(log.Fields{
