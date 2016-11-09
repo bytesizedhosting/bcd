@@ -8,31 +8,31 @@ import (
         "os"
 )
 
-type rclone struct {
+type Rclone struct {
         plugins.Base
         imageName string
 }
 
-func New(client *docker.Client) (*rclone, error) {
+func New(client *docker.Client) (*Rclone, error) {
         manifest, err := plugins.LoadManifest("rclone")
 
         if err != nil {
                 return nil, err
         }
 
-        return &rclone{Base: plugins.Base{DockerClient: client, Name: "rclone", Version: 1, Manifest: manifest}, imageName: "bytesized/rclone"}, nil
+        return &Rclone{Base: plugins.Base{DockerClient: client, Name: "Rclone", Version: 1, Manifest: manifest}, imageName: "bytesized/rclone"}, nil
 }
 
-func (self *rclone) RegisterRPC(server *rpc.Server) {
+func (self *Rclone) RegisterRPC(server *rpc.Server) {
         rpc := plugins.NewBaseRPC(self)
         server.Register(&rcloneRPC{base: self, BaseRPC: *rpc})
 }
 
-type rcloneOpts struct {
+type RcloneOpts struct {
         plugins.BaseOpts
 }
 
-func (self *rclone) Install(opts *rcloneOpts) error {
+func (self *Rclone) Install(opts *RcloneOpts) error {
         var err error
 
         err = opts.SetDefault(self.Name)
