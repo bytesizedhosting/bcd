@@ -10,7 +10,7 @@ func NewRcloneRPC(parent appPlugin) *RcloneRPC {
         return &RcloneRPC{parent}
 }
 
-type BaseRPC struct {
+type RcloneRPC struct {
         base appPlugin
 }
 
