@@ -1,4 +1,4 @@
-package rclone
+package Rclone
 
 import (
         log "github.com/Sirupsen/logrus"
@@ -14,7 +14,7 @@ type Rclone struct {
 }
 
 func New(client *docker.Client) (*Rclone, error) {
-        manifest, err := plugins.LoadManifest("rclone")
+        manifest, err := plugins.LoadManifest("Rclone")
 
         if err != nil {
                 return nil, err
@@ -25,7 +25,7 @@ func New(client *docker.Client) (*Rclone, error) {
 
 func (self *Rclone) RegisterRPC(server *rpc.Server) {
         rpc := plugins.NewBaseRPC(self)
-        server.Register(&rcloneRPC{base: self, BaseRPC: *rpc})
+        server.Register(&RcloneRPC{base: self, BaseRPC: *rpc})
 }
 
 type RcloneOpts struct {
@@ -45,7 +45,7 @@ func (self *Rclone) Install(opts *RcloneOpts) error {
                 "datafolder":   opts.DataFolder,
                 "configfolder": opts.ConfigFolder,
                 "media_folder": opts.MediaFolder,
-        }).Debug("rclone options")
+        }).Debug("Rclone options")
 
         err = os.MkdirAll(opts.ConfigFolder, 0755)
         if err != nil {
