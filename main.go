@@ -17,7 +17,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/plexrequests"
 	"github.com/bytesizedhosting/bcd/plugins/proxy"
 	"github.com/bytesizedhosting/bcd/plugins/rocketchat"
-	"github.com/bytesizedhosting/bcd/plugins/rclone"
+	"github.com/Dedsec1/bcd/plugins/rclone"
 	"github.com/bytesizedhosting/bcd/plugins/rtorrent"
 	"github.com/bytesizedhosting/bcd/plugins/sickrage"
 	"github.com/bytesizedhosting/bcd/plugins/sonarr"
