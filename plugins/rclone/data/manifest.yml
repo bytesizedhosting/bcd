@@ -28,8 +28,14 @@ method_options:
     hint: ""
     name: rclone-bcd
     type: string
-name: rClone
+name: Rclone
+rpc_name: RcloneRPC
 show_options:
+- username
+- password
+- web_port
 - config_folder
 - data_folder
 version: 1
+web_url_format: http://##ip##:##web_port##/
+description: "Data synchronization and back-up tool build on bitorrent technology"
