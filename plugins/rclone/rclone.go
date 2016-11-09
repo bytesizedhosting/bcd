@@ -1,4 +1,3 @@
-
 package rclone
 
 import (
@@ -29,7 +28,7 @@ func (self *rclone) RegisterRPC(server *rpc.Server) {
         server.Register(&rcloneRPC{base: self, BaseRPC: *rpc})
 }
 
-type SonarrOpts struct {
+type rcloneOpts struct {
         plugins.BaseOpts
 }
 
@@ -46,7 +45,7 @@ func (self *rclone) Install(opts *rcloneOpts) error {
                 "datafolder":   opts.DataFolder,
                 "configfolder": opts.ConfigFolder,
                 "media_folder": opts.MediaFolder,
-        }).Debug("Sonarr options")
+        }).Debug("rclone options")
 
         err = os.MkdirAll(opts.ConfigFolder, 0755)
         if err != nil {
