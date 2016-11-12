@@ -1,4 +1,4 @@
-package rclone
+package Rclone
 
 import (
         log "github.com/Sirupsen/logrus"
