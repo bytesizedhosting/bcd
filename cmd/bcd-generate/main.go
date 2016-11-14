@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	log "github.com/Sirupsen/logrus"
+	"github.com/bytesizedhosting/bcd/core"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"io/ioutil"
 	"os"
@@ -100,6 +101,17 @@ func main() {
 		}
 		t = path.Join(pluginPath, "rpc_proxy.go")
 		err = WriteTemplate("rpc.go.templ", t, pkgName)
+		if err != nil {
+			log.Panic(err)
+		}
+
+		err = core.EnsurePath(path.Join(pluginPath, "data"))
+		if err != nil {
+			log.Panic(err)
+		}
+
+		t = path.Join(pluginPath, "data", "manifest.yml")
+		err = WriteTemplate("manifest.yml.templ", t, pkgName)
 		if err != nil {
 			log.Panic(err)
 		}
