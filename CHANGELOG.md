@@ -1,5 +1,15 @@
 ## Changelog
 
+### Version 0.16
+
+- Added Jackett
+- bcd-generate now also generates a manifest file
+
+### Version 0.15
+
+- Added Resilio (BT Sync)
+- Added Headphones
+
 ### Version 0.14.1
 
 - Changed rTorrent app to expose all ports by default and no longer use Dockerfile port bindings

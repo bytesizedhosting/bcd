@@ -14,6 +14,8 @@
 // plugins/filebot/data/manifest.yml
 // plugins/headphones/data/config.ini
 // plugins/headphones/data/manifest.yml
+// plugins/jackett/data/ServerConfig.json
+// plugins/jackett/data/manifest.yml
 // plugins/murmur/data/manifest.yml
 // plugins/murmur/data/murmur.ini
 // plugins/nzbget/data/manifest.yml
@@ -356,7 +358,7 @@ func pluginsHeadphonesDataConfigIni() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "plugins/headphones/data/config.ini", size: 5352, mode: os.FileMode(420), modTime: time.Unix(1478605396, 0)}
+	info := bindataFileInfo{name: "plugins/headphones/data/config.ini", size: 5352, mode: os.FileMode(420), modTime: time.Unix(1478681303, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -376,7 +378,47 @@ func pluginsHeadphonesDataManifestYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "plugins/headphones/data/manifest.yml", size: 1355, mode: os.FileMode(420), modTime: time.Unix(1478605588, 0)}
+	info := bindataFileInfo{name: "plugins/headphones/data/manifest.yml", size: 1355, mode: os.FileMode(420), modTime: time.Unix(1478681303, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _pluginsJackettDataServerconfigJson = "\x1f\x8b\x08\x00\x00\x09\x6e\x88\x00\xff\x44\x8b\xbd\x0a\xc2\x30\x10\x80\xe7\xe6\x29\xc2\xcd\x22\x74\x12\xbb\x55\xda\x41\xba\x64\xf1\x01\xce\xf6\xc4\xe0\xd9\x94\x4b\xa4\x96\x90\x77\x97\x06\x82\xeb\xf7\x13\x55\x05\xc6\x49\x80\x46\x9f\xeb\xfa\x74\x50\x15\xb4\xcc\x6e\xed\xbf\x81\x64\x46\x86\x46\x07\xf9\x50\xe6\xe6\x3a\xd0\x06\x8d\x86\x18\xf5\xb1\x5d\xec\x40\x9b\x4e\x09\xb2\x9b\xde\x76\x36\xe8\xfd\xea\x64\x2a\x49\x3f\x8f\x05\x95\xee\xc2\x38\xbe\x9e\x8e\xa9\xb3\xb2\x67\x19\xde\x96\x09\x03\x75\xd6\xe3\x9d\x69\xbf\x1f\xc8\x9e\xfe\xc6\x08\x09\x31\xa1\xa7\xe2\x54\x52\xea\x17\x00\x00\xff\xff\xdc\x3d\xfe\xa8\xba\x00\x00\x00"
+
+func pluginsJackettDataServerconfigJsonBytes() ([]byte, error) {
+	return bindataRead(
+		_pluginsJackettDataServerconfigJson,
+		"plugins/jackett/data/ServerConfig.json",
+	)
+}
+
+func pluginsJackettDataServerconfigJson() (*asset, error) {
+	bytes, err := pluginsJackettDataServerconfigJsonBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "plugins/jackett/data/ServerConfig.json", size: 186, mode: os.FileMode(420), modTime: time.Unix(1479119447, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _pluginsJackettDataManifestYml = "\x1f\x8b\x08\x00\x00\x09\x6e\x88\x00\xff\xb4\x52\xb1\xae\x9c\x30\x10\xec\xfd\x15\x2b\x68\xc3\x43\x69\xdd\xa6\x7a\xa9\xa2\x77\x55\x2a\xcb\x87\x97\x67\xe7\x8c\xd7\x5a\x2f\x47\x2e\x5f\x1f\x81\xef\xc2\x29\x42\xa9\xf2\x2a\xf0\x30\x3b\x83\x67\x07\x7f\x66\x2a\xe8\xcc\x84\xe2\xc9\x15\xad\x3a\x78\x4d\x45\x6c\x8c\xaa\x83\x37\x2c\x62\x59\x54\x07\x27\xa1\xbc\x3d\xd6\x63\xe5\x1a\xca\x12\x28\x15\xad\xe0\x31\xb2\xbe\x76\xe0\x70\xb4\x73\x14\x73\xb5\x71\x46\x0d\xbd\xa7\x09\xfb\xf3\x4d\xb0\x84\x5f\xe8\xfa\x81\xd2\x18\xde\xfb\x1f\x76\xb8\xa0\x88\x02\x00\x48\x76\x42\x0d\xf5\x83\x19\x29\x3a\xe4\x0d\x97\x5b\x46\x0d\x45\x38\xa4\xf7\x0d\xb0\x31\xd2\x62\x1c\x46\x5c\xad\x35\x08\xcf\x78\xe0\xb9\x71\x7d\x48\xa2\xa1\x69\x9e\x1c\xb2\x2d\x65\x21\x76\xc7\xe2\xf7\x81\xd7\x11\x6e\x34\x43\x44\x7b\x45\x10\x1f\x0a\xe0\x94\xe5\x06\x16\xd8\x26\x47\xd3\x1f\x15\x58\x42\x8c\x70\x46\x28\x18\x71\x10\x74\x30\x12\xaf\xb3\xcd\xbf\x7f\xe9\xb4\xd1\xc1\xc2\xc8\x88\x90\x89\x05\x84\x80\xe7\x54\xdd\x28\x7d\xba\x9b\x57\x5f\x21\xf0\xeb\xc9\x56\x6a\x0e\xc3\x65\xb7\x7a\x79\xba\xdd\x82\x67\xb3\x52\x8e\x6e\x77\xdf\xe4\xe1\x82\xee\x11\x1d\xe4\x35\x50\x12\x1b\x12\xb2\x09\x87\x99\x9d\x3e\x44\x93\xf2\x7f\x95\xac\x9c\x47\xdd\x38\x0f\xa6\x22\x5f\x2b\xf2\xf6\xed\x8b\x2a\x9e\x96\xbd\xce\xdd\xde\x93\x6e\x0f\xb5\xfb\xab\x9f\x57\xe4\xb2\x75\xf0\xb3\x5a\x39\x33\x47\x33\x12\x4f\x56\x34\x78\x91\xac\xfb\xbe\x6d\x43\x6e\x5b\xdd\xb6\x0f\x8d\xb6\xed\x95\xc3\x32\x70\xc8\xb5\xbe\xcd\x77\x9a\x19\x6c\xce\xf0\x04\x83\x47\xc6\x97\x46\xfd\x0e\x00\x00\xff\xff\x6c\x41\xea\x96\x9a\x03\x00\x00"
+
+func pluginsJackettDataManifestYmlBytes() ([]byte, error) {
+	return bindataRead(
+		_pluginsJackettDataManifestYml,
+		"plugins/jackett/data/manifest.yml",
+	)
+}
+
+func pluginsJackettDataManifestYml() (*asset, error) {
+	bytes, err := pluginsJackettDataManifestYmlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "plugins/jackett/data/manifest.yml", size: 922, mode: os.FileMode(420), modTime: time.Unix(1479114627, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -556,7 +598,7 @@ func pluginsResilioDataManifestYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "plugins/resilio/data/manifest.yml", size: 1095, mode: os.FileMode(420), modTime: time.Unix(1478600551, 0)}
+	info := bindataFileInfo{name: "plugins/resilio/data/manifest.yml", size: 1095, mode: os.FileMode(420), modTime: time.Unix(1478681303, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -576,7 +618,7 @@ func pluginsResilioDataSyncConf() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "plugins/resilio/data/sync.conf", size: 3458, mode: os.FileMode(420), modTime: time.Unix(1478601005, 0)}
+	info := bindataFileInfo{name: "plugins/resilio/data/sync.conf", size: 3458, mode: os.FileMode(420), modTime: time.Unix(1478681303, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -847,6 +889,8 @@ var _bindata = map[string]func() (*asset, error){
 	"plugins/filebot/data/manifest.yml": pluginsFilebotDataManifestYml,
 	"plugins/headphones/data/config.ini": pluginsHeadphonesDataConfigIni,
 	"plugins/headphones/data/manifest.yml": pluginsHeadphonesDataManifestYml,
+	"plugins/jackett/data/ServerConfig.json": pluginsJackettDataServerconfigJson,
+	"plugins/jackett/data/manifest.yml": pluginsJackettDataManifestYml,
 	"plugins/murmur/data/manifest.yml": pluginsMurmurDataManifestYml,
 	"plugins/murmur/data/murmur.ini": pluginsMurmurDataMurmurIni,
 	"plugins/nzbget/data/manifest.yml": pluginsNzbgetDataManifestYml,
@@ -942,6 +986,12 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"data": &bintree{nil, map[string]*bintree{
 				"config.ini": &bintree{pluginsHeadphonesDataConfigIni, map[string]*bintree{}},
 				"manifest.yml": &bintree{pluginsHeadphonesDataManifestYml, map[string]*bintree{}},
+			}},
+		}},
+		"jackett": &bintree{nil, map[string]*bintree{
+			"data": &bintree{nil, map[string]*bintree{
+				"ServerConfig.json": &bintree{pluginsJackettDataServerconfigJson, map[string]*bintree{}},
+				"manifest.yml": &bintree{pluginsJackettDataManifestYml, map[string]*bintree{}},
 			}},
 		}},
 		"murmur": &bintree{nil, map[string]*bintree{

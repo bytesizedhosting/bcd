@@ -10,6 +10,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/deluge"
 	"github.com/bytesizedhosting/bcd/plugins/filebot"
 	"github.com/bytesizedhosting/bcd/plugins/headphones"
+	"github.com/bytesizedhosting/bcd/plugins/jackett"
 	"github.com/bytesizedhosting/bcd/plugins/jobs"
 	"github.com/bytesizedhosting/bcd/plugins/murmur"
 	"github.com/bytesizedhosting/bcd/plugins/nzbget"
@@ -173,6 +174,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(headphones)
+	}
+
+	jackett, err := jackett.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(jackett)
 	}
 
 	engine.Activate(stats.New())

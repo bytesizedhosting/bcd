@@ -1,0 +1,10 @@
+{
+	"Port": 9117,
+	"AllowExternal": true,
+	"APIKey": "{{ .ApiKey }}",
+	"AdminPassword": "{{ .EncPassword }}",
+	"BlackholeDir": "",
+	"UpdateDisabled": false,
+	"UpdatePrerelease": false
+}
+
