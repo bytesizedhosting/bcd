@@ -293,6 +293,14 @@ func (s *Base) WriteTemplate(templateName string, outputFile string, object Opti
 		return err
 	}
 
+	if _, err := os.Stat(outputFile); err == nil {
+		log.Debugf("File %s already exists, renaming it for back-up purposes.", outputFile)
+		err := os.Rename(outputFile, fmt.Sprintf("%s.backup", outputFile))
+		if err != nil {
+			log.Warningln("Could not rename file, trying to create the new file anyway. Error:", err)
+		}
+	}
+
 	file, err := os.Create(outputFile)
 	if err != nil {
 		return err
