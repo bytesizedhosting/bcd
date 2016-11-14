@@ -12,7 +12,7 @@ import (
 
 const (
 	versionMajor = 0
-	versionMinor = 15
+	versionMinor = 16
 	versionPatch = 0
 )
 
