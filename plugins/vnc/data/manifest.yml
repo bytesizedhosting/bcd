@@ -1,0 +1,53 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_value: /home/bytesized/config/vnc
+    name: config_folder
+    type: string
+    allow_deletion: true
+  - default_value: /home/bytesized/
+    name: data_folder
+    type: string
+    allow_deletion: false
+  - default_value:
+    hint: ""
+    name: password
+    type: string
+    hint: "If you leave this empty a random password will be selected for you"
+  - default_value:
+    hint: Select a free port to run this app on, leave empty to have a port picked for you.
+    name: web_port
+    type: string
+  - default_value: 5900
+    hint: Select a free port to run this app on, leave empty to have a port picked for you.
+    name: vnc_port
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: container_id
+    type: string
+name: vnc
+rpc_name: VncRPC
+show_options:
+- password
+- vnc_port
+- web_port
+- config_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/vnc.html?host=##ip##&port=##web_port##&password=##password##
+description: "Your app description here."

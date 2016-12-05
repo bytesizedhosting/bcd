@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 0.17
+
+- Added VNC
+
 ### Version 0.16
 
 - Added Jackett

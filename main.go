@@ -26,6 +26,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/stats"
 	"github.com/bytesizedhosting/bcd/plugins/subsonic"
 	"github.com/bytesizedhosting/bcd/plugins/syncthing"
+	"github.com/bytesizedhosting/bcd/plugins/vnc"
 	"github.com/fsouza/go-dockerclient"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
@@ -181,6 +182,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(jackett)
+	}
+
+	vnc, err := vnc.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(vnc)
 	}
 
 	engine.Activate(stats.New())
