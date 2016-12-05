@@ -50,4 +50,4 @@ show_options:
 - config_folder
 version: 1
 web_url_format: http://##ip##:##web_port##/vnc.html?host=##ip##&port=##web_port##&password=##password##
-description: "Your app description here."
+description: "VNC Remote desktop server."
