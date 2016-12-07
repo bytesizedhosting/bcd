@@ -421,7 +421,7 @@ func pluginsJackettDataManifestYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "plugins/jackett/data/manifest.yml", size: 951, mode: os.FileMode(420), modTime: time.Unix(1480952702, 0)}
+	info := bindataFileInfo{name: "plugins/jackett/data/manifest.yml", size: 951, mode: os.FileMode(420), modTime: time.Unix(1481105978, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -861,7 +861,7 @@ func pluginsZncDataManifestYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "plugins/znc/data/manifest.yml", size: 1000, mode: os.FileMode(420), modTime: time.Unix(1481104022, 0)}
+	info := bindataFileInfo{name: "plugins/znc/data/manifest.yml", size: 1000, mode: os.FileMode(420), modTime: time.Unix(1481105995, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -881,7 +881,7 @@ func pluginsZncDataZncConf() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "plugins/znc/data/znc.conf", size: 423, mode: os.FileMode(420), modTime: time.Unix(1481104627, 0)}
+	info := bindataFileInfo{name: "plugins/znc/data/znc.conf", size: 423, mode: os.FileMode(420), modTime: time.Unix(1481105995, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

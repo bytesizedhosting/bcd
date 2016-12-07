@@ -1,5 +1,10 @@
 ## Changelog
 
+### Version 0.19
+
+- Reworked flags to connect to the Docker Daemon. TLS and envirnoment var based connections are now supported using the '--docker-tls' and '--docker-env' flags.
+- The 'docker-socket' flag is now called 'docker-endpoint'
+
 ### Version 0.18
 
 - Added ZNC

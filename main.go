@@ -36,8 +36,16 @@ import (
 var (
 	app      = kingpin.New("bcd", "The Bytesized Connect Daemon")
 	port     = app.Flag("port", "Port to run the RPC server on").Default("8112").String()
-	endpoint = app.Flag("docker-socket", "Location of the docker socket").Default("unix:///var/run/docker.sock").String()
 	logLevel = app.Flag("log-level", "Log level").Default("debug").String()
+
+	endpoint = app.Flag("docker-endpoint", "Docker endpoint to use").Default("unix:///var/run/docker.sock").String()
+
+	dockerTLS = app.Flag("docker-tls", "Connect to a TLS enabled Docker daemon").Bool()
+	dockerEnv = app.Flag("docker-env", "Connect to Docker using Docker-machine environment variables").Bool()
+
+	ca   = app.Flag("docker-ca-path", "Path to your CA file, required for TLS connection.").String()
+	cert = app.Flag("docker-cert-path", "Path to your cert file, required for TLS connection.").String()
+	key  = app.Flag("docker-key-path", "Path to your key file, required for TLS connection.").String()
 
 	register  = app.Command("init", "Initialize this instance of bcd")
 	apikey    = register.Arg("apikey", "Apikey supplied by your provider").Required().String()
@@ -54,7 +62,23 @@ func startApp(config *core.MainConfig) {
 	}
 	log.SetLevel(level)
 	log.Infoln("Set logging level to", *logLevel)
-	dockerClient, _ := docker.NewClient(*endpoint)
+
+	var dockerClient *docker.Client
+
+	if *dockerTLS == true {
+		log.Infoln("Connecting to Docker daemon via TLS")
+		dockerClient, err = docker.NewTLSClient(*endpoint, *cert, *key, *ca)
+	} else if *dockerEnv == true {
+		log.Infoln("Connecting to Docker daemon via environment variables")
+		dockerClient, err = docker.NewClientFromEnv()
+	} else {
+		dockerClient, err = docker.NewClient(*endpoint)
+	}
+
+	if err != nil {
+		log.Errorf("Could not connect to Docker daemon: '%s'", err.Error())
+		os.Exit(1)
+	}
 
 	engine := engine.NewRpcEngine(config)
 
