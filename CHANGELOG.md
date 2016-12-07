@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 0.18
+
+- Added ZNC
+
 ### Version 0.17
 
 - Added VNC

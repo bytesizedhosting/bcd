@@ -27,6 +27,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/subsonic"
 	"github.com/bytesizedhosting/bcd/plugins/syncthing"
 	"github.com/bytesizedhosting/bcd/plugins/vnc"
+	"github.com/bytesizedhosting/bcd/plugins/znc"
 	"github.com/fsouza/go-dockerclient"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
@@ -189,6 +190,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(vnc)
+	}
+
+	znc, err := znc.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(znc)
 	}
 
 	engine.Activate(stats.New())
