@@ -17,6 +17,7 @@ var (
 	cachePath        = kingpin.Flag("cache-path", "Location where to store certificates and keyfiles").String()
 	disableAutoHttps = kingpin.Flag("disable-auto-https", "Disable experimental auto-https support.").Bool()
 	email            = kingpin.Flag("email", "Email address to use for Letsencrypt certificates").String()
+	unknownHost      = kingpin.Flag("unknown-host", "Host to proxy requests to that are unknown to bcd-proxy").String()
 )
 
 func init() {
@@ -34,10 +35,13 @@ func init() {
 	cpath := path.Join(user.HomeDir, ".config", "bcd")
 	proxyPath = path.Join(cpath, "proxies.json")
 	log.Debugln("Proxies file will be loaded from:", proxyPath)
+	if *unknownHost != "" {
+		log.Infoln("Proxying unknown routes to", *unknownHost)
+	}
 }
 
 func main() {
-	proxy := NewMultipleHostReverseProxy(proxyPath)
+	proxy := NewMultipleHostReverseProxy(proxyPath, *unknownHost)
 
 	if !*disableAutoHttps {
 		log.Infoln("Enabling experimental auto-https support")

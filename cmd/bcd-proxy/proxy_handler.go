@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func NewMultipleHostReverseProxy(proxyPath string) *httputil.ReverseProxy {
+func NewMultipleHostReverseProxy(proxyPath string, unknownHost string) *httputil.ReverseProxy {
 	cleanReg := regexp.MustCompile(`:\d*`)
 	lastUpdate := time.Now()
 	proxyMap := &proxy.ProxyMap{}
@@ -71,10 +71,17 @@ func NewMultipleHostReverseProxy(proxyPath string) *httputil.ReverseProxy {
 			log.Debugln("Host", h)
 			log.Debugln("Path", p)
 		} else {
-			log.Debugln("No proxy pass for this host.")
-			req.URL.Scheme = "http"
-			req.URL.Host = "download.bytesized-hosting.com"
-			req.URL.Path = "/noproxy.html"
+			log.Debugln("No routes known for the incoming url.")
+			if unknownHost == "" {
+				log.Debugln("No custom host set, redirecting to standard error domain.")
+				req.URL.Scheme = "http"
+				req.URL.Host = "download.bytesized-hosting.com"
+				req.URL.Path = "/noproxy.html"
+			} else {
+				log.Debugln("Custom host set, redirecting.")
+				req.URL.Scheme = "http"
+				req.URL.Host = unknownHost
+			}
 		}
 	}
 	return &httputil.ReverseProxy{Director: director}
