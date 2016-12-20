@@ -10,3 +10,5 @@ Bcd-proxy runs on port 80 and 443 by default and can work with both https and ht
 
 ### Proxying to a local webserver
 You can use the `--unknown-host` flag if you want to use bcd-proxy in combination with a local webserver. Any URLs that it doesn't hold a record for will be passed to the local webserver. Do note that https URLs are also supported but that the communication from bcd-proxy to your local webserver will always run over http. Since the requests are usually local this however should not have security implications.
+
+It's recommended to edit your upstart/systemd files and add the option in so it survives restarts.

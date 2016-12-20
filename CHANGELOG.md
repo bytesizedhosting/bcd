@@ -4,6 +4,7 @@
 
 - Reworked flags to connect to the Docker Daemon. TLS and envirnoment var based connections are now supported using the '--docker-tls' and '--docker-env' flags.
 - The 'docker-socket' flag is now called 'docker-endpoint'
+- Allow bcd-proxy to proxy to a local webserver using the `--unknown-host` flag. Any unknown URLs will be forwarded to the server specified.
 
 ### Version 0.18
 
