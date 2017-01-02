@@ -20,6 +20,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/proxy"
 	"github.com/bytesizedhosting/bcd/plugins/resilio"
 	"github.com/bytesizedhosting/bcd/plugins/rocketchat"
+	"github.com/bytesizedhosting/bcd/plugins/rclone"
 	"github.com/bytesizedhosting/bcd/plugins/rtorrent"
 	"github.com/bytesizedhosting/bcd/plugins/sickrage"
 	"github.com/bytesizedhosting/bcd/plugins/sonarr"
@@ -95,6 +96,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(plex)
+	}
+	
+	rclone, err := rclone.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(rclone)
 	}
 
 	rocketchat, err := rocketchat.New(dockerClient)

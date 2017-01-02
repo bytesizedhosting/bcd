@@ -1,0 +1,35 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_vault: /home/bytesized/rclone
+    hint: ""
+    name: config_folder
+    type: string
+  - default_value: /home/bytesized/rclone/data
+    hint: ""
+    name: data_folder
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: rclone-bcd
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: rclone-bcd
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: rclone-bcd
+    type: string
+name: rClone
+show_options:
+- config_folder
+- data_folder
+version: 1
