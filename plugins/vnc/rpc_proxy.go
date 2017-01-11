@@ -12,7 +12,6 @@ type VncRPC struct {
 	base *Vnc
 	plugins.BaseRPC
 }
-
 func (self *VncRPC) Reinstall(opts *VncOpts, job *jobs.Job) error {
 	err := self.base.Uninstall(&plugins.AppConfig{ContainerId: opts.ContainerId})
 	if err != nil {
