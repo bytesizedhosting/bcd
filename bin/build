@@ -15,7 +15,9 @@ echo "* Generating RPC proxy wrappers"
 go generate
 
 echo "* Building bcd"
-go install -v
+go install -v github.com/bytesizedhosting/bcd
+go build -v github.com/bytesizedhosting/bcd
 
 echo "* Building bcd-proxy"
 go install -v github.com/bytesizedhosting/bcd/cmd/bcd-proxy
+go build -v github.com/bytesizedhosting/bcd/cmd/bcd-proxy
