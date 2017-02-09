@@ -192,27 +192,27 @@
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/acme",
-			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
+			"Rev": "92783773f0d5c65e68a806909423bea53c78df01"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/acme/autocert",
-			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
+			"Rev": "92783773f0d5c65e68a806909423bea53c78df01"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/bcrypt",
-			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
+			"Rev": "92783773f0d5c65e68a806909423bea53c78df01"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/blowfish",
-			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
+			"Rev": "92783773f0d5c65e68a806909423bea53c78df01"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
-			"Rev": "daba796358cd2742b75aae05761f1b898c9f6a5c"
+			"Rev": "236b8f043b920452504e263bc21d354427127473"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context/ctxhttp",
-			"Rev": "daba796358cd2742b75aae05761f1b898c9f6a5c"
+			"Rev": "236b8f043b920452504e263bc21d354427127473"
 		},
 		{
 			"ImportPath": "golang.org/x/sys/unix",
