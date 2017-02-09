@@ -1,5 +1,10 @@
 ## Changelog
 
+### Version 0.19.1
+- Fixed a problem with Deluge where a password was not automatically assigned if left empty.
+- Performance improvements to bcd-proxy.
+- Set log level to info by default for bcd and bcd-proxy.
+
 ### Version 0.19
 
 - Reworked flags to connect to the Docker Daemon. TLS and envirnoment var based connections are now supported using the '--docker-tls' and '--docker-env' flags.

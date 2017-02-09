@@ -11,6 +11,18 @@ import (
 	"time"
 )
 
+func noProxyRes(req *http.Request, unknownHost string) {
+	if unknownHost == "" {
+		req.URL.Scheme = "http"
+		req.URL.Host = "download.bytesized-hosting.com"
+		req.URL.Path = "/noproxy.html"
+	} else {
+		log.Debugln("Custom host set, redirecting.")
+		req.URL.Scheme = "http"
+		req.URL.Host = unknownHost
+	}
+}
+
 func NewMultipleHostReverseProxy(proxyPath string, unknownHost string) *httputil.ReverseProxy {
 	cleanReg := regexp.MustCompile(`:\d*`)
 	lastUpdate := time.Now()
@@ -25,7 +37,6 @@ func NewMultipleHostReverseProxy(proxyPath string, unknownHost string) *httputil
 	err := proxyMap.LoadFromConfig(proxyPath)
 	if err != nil {
 		log.Infoln("Could not read config file, starting with empty state.", err)
-		log.Infoln(proxyMap)
 	}
 
 	info, err := os.Stat(proxyPath)
@@ -37,11 +48,11 @@ func NewMultipleHostReverseProxy(proxyPath string, unknownHost string) *httputil
 
 	director := func(req *http.Request) {
 		log.Debugln("Incoming request from:", req.Host)
-		log.Debugln("Getting last modifcation time")
 
 		info, err := os.Stat(proxyPath)
 		if err != nil {
-			log.Debugln("Could not get last modification time, breaking")
+			log.Debugln("Proxy config file does not exist.")
+			noProxyRes(req, unknownHost)
 			return
 		}
 
@@ -51,9 +62,9 @@ func NewMultipleHostReverseProxy(proxyPath string, unknownHost string) *httputil
 		if info.ModTime().After(lastUpdate) {
 			err := proxyMap.LoadFromConfig(proxyPath)
 			if err != nil {
-				log.Infoln("Could not read config file, starting with empty state.", err)
+				log.Debugln("Could not read config file, starting with empty state.", err)
 			}
-			log.Println("Modification time was after our last, updating proxy map:", proxyMap)
+			log.Debugln("Modification time was after our last, updating proxy map:", proxyMap)
 			lastUpdate = time.Now()
 		}
 
@@ -72,16 +83,7 @@ func NewMultipleHostReverseProxy(proxyPath string, unknownHost string) *httputil
 			log.Debugln("Path", p)
 		} else {
 			log.Debugln("No routes known for the incoming url.")
-			if unknownHost == "" {
-				log.Debugln("No custom host set, redirecting to standard error domain.")
-				req.URL.Scheme = "http"
-				req.URL.Host = "download.bytesized-hosting.com"
-				req.URL.Path = "/noproxy.html"
-			} else {
-				log.Debugln("Custom host set, redirecting.")
-				req.URL.Scheme = "http"
-				req.URL.Host = unknownHost
-			}
+			noProxyRes(req, unknownHost)
 		}
 	}
 	return &httputil.ReverseProxy{Director: director}

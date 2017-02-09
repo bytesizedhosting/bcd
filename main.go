@@ -36,7 +36,7 @@ import (
 var (
 	app      = kingpin.New("bcd", "The Bytesized Connect Daemon")
 	port     = app.Flag("port", "Port to run the RPC server on").Default("8112").String()
-	logLevel = app.Flag("log-level", "Log level").Default("debug").String()
+	logLevel = app.Flag("log-level", "Log level").Default("info").String()
 
 	endpoint = app.Flag("docker-endpoint", "Docker endpoint to use").Default("unix:///var/run/docker.sock").String()
 
@@ -57,8 +57,8 @@ var (
 func startApp(config *core.MainConfig) {
 	level, err := log.ParseLevel(*logLevel)
 	if err != nil {
-		log.Infof("Could not parse log level %v, using 'debug' instead. %v", *logLevel, err)
-		level = log.DebugLevel
+		log.Infof("Could not parse log level %v, using 'info' instead. %v", *logLevel, err)
+		level = log.InfoLevel
 	}
 	log.SetLevel(level)
 	log.Infoln("Set logging level to", *logLevel)

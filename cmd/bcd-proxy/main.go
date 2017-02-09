@@ -18,11 +18,18 @@ var (
 	disableAutoHttps = kingpin.Flag("disable-auto-https", "Disable experimental auto-https support.").Bool()
 	email            = kingpin.Flag("email", "Email address to use for Letsencrypt certificates").String()
 	unknownHost      = kingpin.Flag("unknown-host", "Host to proxy requests to that are unknown to bcd-proxy").String()
+	logLevel         = kingpin.Flag("log-level", "Log level").Default("info").String()
 )
 
 func init() {
-	log.SetLevel(log.DebugLevel)
 	kingpin.Parse()
+	level, err := log.ParseLevel(*logLevel)
+	if err != nil {
+		log.Infof("Could not parse log level %v, using 'info' instead. %v", *logLevel, err)
+		level = log.InfoLevel
+	}
+	log.SetLevel(level)
+	log.Infoln("Set logging level to", *logLevel)
 
 	user, err := core.GetUser(*userName)
 	if err != nil {

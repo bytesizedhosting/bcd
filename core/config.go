@@ -13,7 +13,7 @@ import (
 const (
 	versionMajor = 0
 	versionMinor = 19
-	versionPatch = 0
+	versionPatch = 1
 )
 
 var (
@@ -64,7 +64,6 @@ func LoadHomeConfig(fileName string, conf interface{}) error {
 func LoadConfig(filePath string, conf interface{}) error {
 	log.Infoln("Loading config file in:", filePath)
 	result, err := ioutil.ReadFile(filePath)
-	log.Infoln("Loaded config:", string(result))
 
 	if err != nil {
 		return err
