@@ -18,6 +18,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/plexpy"
 	"github.com/bytesizedhosting/bcd/plugins/plexrequests"
 	"github.com/bytesizedhosting/bcd/plugins/proxy"
+	"github.com/bytesizedhosting/bcd/plugins/radarr"
 	"github.com/bytesizedhosting/bcd/plugins/resilio"
 	"github.com/bytesizedhosting/bcd/plugins/rocketchat"
 	"github.com/bytesizedhosting/bcd/plugins/rtorrent"
@@ -221,6 +222,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(znc)
+	}
+
+	radarr, err := radarr.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(radarr)
 	}
 
 	engine.Activate(stats.New())

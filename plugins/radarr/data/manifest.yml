@@ -5,26 +5,21 @@ exposed_methods:
 - Start
 method_options:
   Install:
-  - default_value: bytesized
-    hint: ""
-    name: username
-    type: string
-  - default_value: /home/bytesized/config/resilio
-    hint: ""
+  - default_value: /home/bytesized/config/radarr
     name: config_folder
     type: string
     allow_deletion: true
   - default_value: /home/bytesized/data
-    hint: ""
+    hint: Folder containing your data
     name: data_folder
+    type: string
+  - default_value: /home/bytesized/media
+    hint: Folder with renamed media data
+    name: media_folder
     type: string
   - default_value:
     hint: Select a free port to run this on, leave empty to have a port picked for you.
     name: web_port
-    type: string
-  - default_value: ""
-    hint: ""
-    name: password
     type: string
   Restart:
   - default_value: ""
@@ -41,14 +36,13 @@ method_options:
     hint: ""
     name: container_id
     type: string
-name: Resilio
-rpc_name: ResilioRPC
+name: Radarr
+rpc_name: RadarrRPC
 show_options:
-- username
-- password
 - web_port
-- config_folder
 - data_folder
+- config_folder
+- media_folder
 version: 1
 web_url_format: http://##ip##:##web_port##/
-description: "Data synchronization tool build on bitorrent technology"
+description: "Sonarr for Movies"
