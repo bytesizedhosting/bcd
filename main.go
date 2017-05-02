@@ -17,6 +17,7 @@ import (
 	"github.com/bytesizedhosting/bcd/plugins/plex"
 	"github.com/bytesizedhosting/bcd/plugins/plexpy"
 	"github.com/bytesizedhosting/bcd/plugins/plexrequests"
+	"github.com/bytesizedhosting/bcd/plugins/portainer"
 	"github.com/bytesizedhosting/bcd/plugins/proxy"
 	"github.com/bytesizedhosting/bcd/plugins/radarr"
 	"github.com/bytesizedhosting/bcd/plugins/resilio"
@@ -229,6 +230,13 @@ func startApp(config *core.MainConfig) {
 		log.Infoln("Could not enable plugin: ", err)
 	} else {
 		engine.Activate(radarr)
+	}
+
+	portainer, err := portainer.New(dockerClient)
+	if err != nil {
+		log.Infoln("Could not enable plugin: ", err)
+	} else {
+		engine.Activate(portainer)
 	}
 
 	engine.Activate(stats.New())

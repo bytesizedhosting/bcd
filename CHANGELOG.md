@@ -1,6 +1,15 @@
 ## Changelog
 
+### Version 0.21
+
+- Added Portainer support
+
+### Version 0.20
+
+- Added Radarr support
+
 ### Version 0.19.1
+
 - Fixed a problem with Deluge where a password was not automatically assigned if left empty.
 - Performance improvements to bcd-proxy.
 - Set log level to info by default for bcd and bcd-proxy.
