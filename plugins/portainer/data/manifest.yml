@@ -35,8 +35,7 @@ method_options:
 name: portainer
 rpc_name: PortainerRPC
 show_options:
-- username
-- password
+- socket_path
 - web_port
 - config_folder
 version: 1
