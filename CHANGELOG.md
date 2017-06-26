@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 0.22
+
+- Change Plex to use the official Docker image.
+
 ### Version 0.21
 
 - Added Portainer support

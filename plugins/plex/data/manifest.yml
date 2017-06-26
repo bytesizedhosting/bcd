@@ -6,13 +6,9 @@ exposed_methods:
 method_options:
   Install:
   - default_value: ""
-    hint: ""
-    name: plex_email
+    hint: "Claim token can be obtained here: https://www.plex.tv/claim/"
+    name: plex_claim
     type: string
-  - default_value: ""
-    hint: ""
-    name: plex_password
-    type: password
   - default_value: /home/bytesized/config/plex
     hint: ""
     name: config_folder
@@ -29,10 +25,6 @@ method_options:
     hint: ""
     name: plex_pass
     type: boolean
-  - default_value:
-    hint: Select a free port to run this on, leave empty to have a port picked for you.
-    name: web_port
-    type: string
   Restart:
   - default_value: ""
     hint: ""
@@ -51,10 +43,8 @@ method_options:
 name: Plex
 rpc_name: PlexRPC
 show_options:
-- plex_email
-- web_port
 - config_folder
 - data_folder
 version: 1
-web_url_format: http://##ip##:##web_port##/web/
-description: "Latest Plex server from the un-official Plex repository"
+web_url_format: http://##ip##:32400
+description: "Latest Plex server based on the official Plex Docker image"

@@ -14,9 +14,8 @@ type Plex struct {
 
 type PlexOpts struct {
 	plugins.BaseOpts
-	PlexEmail    string `json:"plex_email,omitempty"`
-	PlexPassword string `json:"plex_password,omitempty"`
-	PlexPass     string `json:"plex_pass"`
+	PlexClaim string `json:"plex_claim,omitempty"`
+	PlexPass  string `json:"plex_pass"`
 }
 
 func New(client *docker.Client) (*Plex, error) {
@@ -25,7 +24,7 @@ func New(client *docker.Client) (*Plex, error) {
 		return nil, err
 	}
 
-	return &Plex{Base: plugins.Base{DockerClient: client, Name: "Plex", Version: 1, Manifest: manifest}, imageName: "bytesized/plex"}, nil
+	return &Plex{Base: plugins.Base{DockerClient: client, Name: "Plex", Version: 1, Manifest: manifest}, imageName: "plexinc/pms-docker"}, nil
 }
 
 func (self *Plex) RegisterRPC(server *rpc.Server) {
@@ -43,15 +42,16 @@ func (self *Plex) Install(opts *PlexOpts) error {
 	dockerImage := self.imageName
 
 	if opts.PlexPass == "1" {
-		dockerImage = dockerImage + ":pass"
+		dockerImage = dockerImage + ":plexpass"
+	} else {
+		dockerImage = dockerImage + ":latest"
 	}
 
 	log.WithFields(log.Fields{
 		"plugin":       self.Name,
 		"datafolder":   opts.DataFolder,
 		"configfolder": opts.ConfigFolder,
-		"username":     opts.Username,
-		"password":     opts.PlexPassword,
+		"claim":        opts.PlexClaim,
 		"plexpass":     opts.PlexPass,
 	}).Debug("Plex options")
 
@@ -61,17 +61,13 @@ func (self *Plex) Install(opts *PlexOpts) error {
 		return err
 	}
 
-	portBindings := map[docker.Port][]docker.PortBinding{
-		"32400/tcp": []docker.PortBinding{docker.PortBinding{HostPort: opts.WebPort}},
-	}
-
 	hostConfig := docker.HostConfig{
-		PortBindings: portBindings,
-		Binds:        plugins.DefaultBindings(opts),
+		NetworkMode: "host",
+		Binds:       plugins.DefaultBindings(opts),
 	}
 
 	log.Infoln("Creating docker container")
-	conf := docker.Config{Env: []string{"PUID=" + opts.User.Uid, "PGID=" + opts.User.Gid, "PLEX_USERNAME=" + opts.PlexEmail, "PLEX_PASSWORD=" + opts.PlexPassword, "PLEX_EXTERNALPORT=" + opts.WebPort, "RUN_AS_ROOT=FALSE"}, Image: dockerImage}
+	conf := docker.Config{Env: []string{"PLEX_UID=" + opts.User.Uid, "PLEX_GID=" + opts.User.Gid, "PLEX_CLAIM=" + opts.PlexClaim}, Image: dockerImage}
 	c, err := self.DockerClient.CreateContainer(docker.CreateContainerOptions{Config: &conf, HostConfig: &hostConfig, Name: "bytesized_plex_" + opts.WebPort})
 
 	if err != nil {
