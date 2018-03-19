@@ -1,4 +1,4 @@
-// Copyright 2014 go-dockerclient authors. All rights reserved.
+// Copyright 2015 go-dockerclient authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -53,12 +53,10 @@ type APIActor struct {
 }
 
 type eventMonitoringState struct {
-	// `sync/atomic` expects the first word in an allocated struct to be 64-bit
-	// aligned on both ARM and x86-32. See https://goo.gl/zW7dgq for more details.
-	lastSeen int64
 	sync.RWMutex
 	sync.WaitGroup
 	enabled   bool
+	lastSeen  int64
 	C         chan *APIEvents
 	errC      chan error
 	listeners []chan<- *APIEvents
@@ -96,7 +94,11 @@ func (c *Client) AddEventListener(listener chan<- *APIEvents) error {
 			return err
 		}
 	}
-	return c.eventMonitor.addListener(listener)
+	err = c.eventMonitor.addListener(listener)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // RemoveEventListener removes a listener from the monitor.
@@ -105,7 +107,7 @@ func (c *Client) RemoveEventListener(listener chan *APIEvents) error {
 	if err != nil {
 		return err
 	}
-	if c.eventMonitor.listernersCount() == 0 {
+	if len(c.eventMonitor.listeners) == 0 {
 		c.eventMonitor.disableEventMonitoring()
 	}
 	return nil
@@ -144,12 +146,6 @@ func (eventState *eventMonitoringState) closeListeners() {
 		eventState.Add(-1)
 	}
 	eventState.listeners = nil
-}
-
-func (eventState *eventMonitoringState) listernersCount() int {
-	eventState.RLock()
-	defer eventState.RUnlock()
-	return len(eventState.listeners)
 }
 
 func listenerExists(a chan<- *APIEvents, list *[]chan<- *APIEvents) bool {
