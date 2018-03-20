@@ -1,8 +1,12 @@
 ## Changelog
 
+### Version 0.23
+
+- Update "Let's Encrypt" to get SSL back into action
+
 ### Version 0.22
 
-- Change Plex to use the official Docker image.
+- Change Plex to use the official Docker image
 
 ### Version 0.21
 

@@ -1,7 +1,7 @@
 {
 	"ImportPath": "github.com/bytesizedhosting/bcd",
 	"GoVersion": "go1.7",
-	"GodepVersion": "v74",
+	"GodepVersion": "v80",
 	"Packages": [
 		"./..."
 	],
@@ -192,27 +192,27 @@
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/acme",
-			"Rev": "92783773f0d5c65e68a806909423bea53c78df01"
+			"Rev": "c3a3ad6d03f7a915c0f7e194b7152974bb73d287"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/acme/autocert",
-			"Rev": "92783773f0d5c65e68a806909423bea53c78df01"
+			"Rev": "c3a3ad6d03f7a915c0f7e194b7152974bb73d287"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/bcrypt",
-			"Rev": "92783773f0d5c65e68a806909423bea53c78df01"
+			"Rev": "c3a3ad6d03f7a915c0f7e194b7152974bb73d287"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/blowfish",
-			"Rev": "92783773f0d5c65e68a806909423bea53c78df01"
+			"Rev": "c3a3ad6d03f7a915c0f7e194b7152974bb73d287"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
-			"Rev": "236b8f043b920452504e263bc21d354427127473"
+			"Rev": "0ed95abb35c445290478a5348a7b38bb154135fd"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context/ctxhttp",
-			"Rev": "236b8f043b920452504e263bc21d354427127473"
+			"Rev": "0ed95abb35c445290478a5348a7b38bb154135fd"
 		},
 		{
 			"ImportPath": "golang.org/x/sys/unix",
