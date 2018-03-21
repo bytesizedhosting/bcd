@@ -29,7 +29,7 @@ func defaultCachePath() string {
 	return path.Join(home, ".config", "bcd-proxy")
 }
 
-func NewAutoHttpsServer(cachePath string, email string, handler http.Handler) *http.Server {
+func NewAutoHttpsServer(cachePath string, email string, handler http.Handler) (*http.Server, http.Handler) {
 	if cachePath == "" {
 		cachePath = defaultCachePath()
 	}
@@ -42,11 +42,13 @@ func NewAutoHttpsServer(cachePath string, email string, handler http.Handler) *h
 		Email:      email,
 	}
 
+	autocert := m.HTTPHandler(handler)
+
 	s := &http.Server{
 		Addr:      ":https",
 		TLSConfig: &tls.Config{GetCertificate: m.GetCertificate},
 		Handler:   handler,
 	}
 
-	return s
+	return s, autocert
 }

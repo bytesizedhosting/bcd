@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 0.23.1
+- Change "Let's Encrypt" to use HTTP verificatio to fix issueing of new certificates
+
 ### Version 0.23
 
 - Update "Let's Encrypt" to get SSL back into action
