@@ -18,7 +18,7 @@ __Connect Overview__
 ### Installation
 
 #### Automatic installation
-If you are on Ubuntu 14.04 or 16.04 you can use the automatic installer. To install simply create a new Connect Account on the [Bytesized website](https://bytesized-hosting.com/engine/accounts/new) and follow the steps.
+If you are on Ubuntu 14.04, 16.04 or 18.04 you can use the automatic installer. To install simply create a new Connect Account on the [Bytesized website](https://bytesized-hosting.com/engine/accounts/new) and follow the steps.
 
 #### Manual installation
 These are the basic steps required to run BCD without the automatic installer.
