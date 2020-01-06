@@ -68,20 +68,20 @@ stop_bcd(){
 update_services(){
     if is_upstart; then
       info "Found upstart"
-      if ! curl -o /etc/init/bcd.conf https://download.bytesized-hosting.com/bcd.conf;then
+      if ! curl -o /etc/init/bcd.conf https://storage.googleapis.com/bysh-chef-files/bsc/bcd.conf;then
         fail "Failed to download upstart service file"
       fi
 
-      if ! curl -o /etc/init/bcd-proxy.conf https://download.bytesized-hosting.com/bcd-proxy.conf;then
+      if ! curl -o /etc/init/bcd-proxy.conf https://storage.googleapis.com/bysh-chef-files/bsc/bcd-proxy.conf;then
         fail "Failed to download proxy upstart service file"
       fi
     elif is_systemd; then
       info "Found systemd"
-      if ! curl -o /lib/systemd/system/bcd.service https://download.bytesized-hosting.com/bcd.service;then
+      if ! curl -o /lib/systemd/system/bcd.service https://storage.googleapis.com/bysh-chef-files/bsc/bcd.service;then
         fail "Failed to download systemd service file"
       fi
 
-      if ! curl -o /lib/systemd/system/bcd-proxy.service https://download.bytesized-hosting.com/bcd-proxy.service;then
+      if ! curl -o /lib/systemd/system/bcd-proxy.service https://storage.googleapis.com/bysh-chef-files/bsc/bcd-proxy.service;then
         fail "Failed to download bcd-proxy systemd service file"
       fi
 
@@ -90,13 +90,13 @@ update_services(){
 }
 download_bins(){
     info "Downloading latest BCD release"
-    if ! curl -o /usr/local/bin/bcd https://download.bytesized-hosting.com/bcd;then
+    if ! curl -o /usr/local/bin/bcd https://storage.googleapis.com/bysh-chef-files/bsc/bcd;then
       fail "Failed to download bcd release"
     fi
     run chmod +x /usr/local/bin/bcd
 
     info "Downloading latest BCD-Proxy release"
-    if ! curl -o /usr/local/bin/bcd-proxy https://download.bytesized-hosting.com/bcd-proxy;then
+    if ! curl -o /usr/local/bin/bcd-proxy https://storage.googleapis.com/bysh-chef-files/bsc/bcd-proxy;then
       fail "Failed to download bcd-proxy release"
     fi
 
@@ -156,11 +156,11 @@ main() {
 
     if is_upstart; then
       info "Found upstart"
-      if ! curl -o /etc/init/bcd.conf https://download.bytesized-hosting.com/bcd.conf;then
+      if ! curl -o /etc/init/bcd.conf https://storage.googleapis.com/bysh-chef-files/bsc/bcd.conf;then
         fail "Failed to download upstart service file"
       fi
 
-      if ! curl -o /etc/init/bcd-proxy.conf https://download.bytesized-hosting.com/bcd-proxy.conf;then
+      if ! curl -o /etc/init/bcd-proxy.conf https://storage.googleapis.com/bysh-chef-files/bsc/bcd-proxy.conf;then
         fail "Failed to download proxy upstart service file"
       fi
 
@@ -169,11 +169,11 @@ main() {
 
     elif is_systemd; then
       info "Found systemd"
-      if ! curl -o /lib/systemd/system/bcd.service https://download.bytesized-hosting.com/bcd.service;then
+      if ! curl -o /lib/systemd/system/bcd.service https://storage.googleapis.com/bysh-chef-files/bsc/bcd.service;then
         fail "Failed to download systemd service file"
       fi
 
-      if ! curl -o /lib/systemd/system/bcd-proxy.service https://download.bytesized-hosting.com/bcd-proxy.service;then
+      if ! curl -o /lib/systemd/system/bcd-proxy.service https://storage.googleapis.com/bysh-chef-files/bsc/bcd-proxy.service;then
         fail "Failed to download bcd-proxy systemd service file"
       fi
 
