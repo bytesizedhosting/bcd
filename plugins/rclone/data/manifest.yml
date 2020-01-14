@@ -1,0 +1,41 @@
+exposed_methods:
+- Install
+- Restart
+- Stop
+- Start
+method_options:
+  Install:
+  - default_vault: /home/bytesized/rclone
+    hint: ""
+    name: config_folder
+    type: string
+  - default_value: /home/bytesized/rclone/data
+    hint: ""
+    name: data_folder
+    type: string
+  Restart:
+  - default_value: ""
+    hint: ""
+    name: rclone-bcd
+    type: string
+  Start:
+  - default_value: ""
+    hint: ""
+    name: rclone-bcd
+    type: string
+  Stop:
+  - default_value: ""
+    hint: ""
+    name: rclone-bcd
+    type: string
+name: Rclone
+rpc_name: RcloneRPC
+show_options:
+- username
+- password
+- web_port
+- config_folder
+- data_folder
+version: 1
+web_url_format: http://##ip##:##web_port##/
+description: "Data synchronization and back-up tool build on bitorrent technology"
